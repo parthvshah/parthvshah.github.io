@@ -1,0 +1,69 @@
+body {
+	background: url('../img/bg-main.jpg') center center fixed;
+	background-repeat: no-repeat;
+	-webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+.overlay {
+    z-index: 1;
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    overflow: auto;
+    top: 0px;
+    left: 0px;
+    background: rgba(1, 1, 1, 0.4);
+}
+
+.content {
+	font-family: 'Roboto-mono', sans-serif;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 50%;
+    transform: translateX(-50%) translateY(-50%);
+}
+
+#main {
+	font-size: 265%;
+}
+
+
+.text {
+	font-size: 160%;
+	color: white;
+}
+
+#intro-icons {
+  	margin: 0 auto;
+  	padding-top: 10px;
+}
+
+.fa{
+    display: block;
+    margin-right: 20px;
+    color: white;
+}
+
+.fa-linkedin:hover{
+    color: #0077b5;
+}
+
+.fa-github:hover{
+    color: #0077b5;
+}
+
+.fa-instagram:hover{
+  color: #0077b5;
+}
+
+.fa-envelope:hover{
+  color: #0077b5;
+}
+
+.fa-file-text-o:hover{
+    color: #0077b5;
+}
