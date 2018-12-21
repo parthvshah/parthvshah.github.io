@@ -1,3 +1,7 @@
+@media only screen and (max-width: 320px) {
+    background-size: 200% 200%;
+}
+
 body {
 	background: url('../img/bg-main.jpg') center center fixed;
 	background-repeat: repeat;
