@@ -1,11 +1,17 @@
 body {
-	background: url('../img/bg-main.jpg') center fixed;
+    background: url('../img/bg-main.jpg') center center fixed;
 	/* background-repeat: repeat; */
 	-webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
 }
+
+@media screen and (max-width:800px) {
+    body {
+      background-size: cover;
+      background-attachment: fixed }
+    }
 
 .overlay {
     z-index: 1;
