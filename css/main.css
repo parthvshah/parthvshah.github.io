@@ -1,7 +1,7 @@
 html {
     background: url('../img/bg-main.jpg');
     background-position: center center;
-    background-repeat: repeat;
+    background-repeat: no-repeat;
     background-attachment: fixed;
 	-webkit-background-size: cover;
     -moz-background-size: cover;
