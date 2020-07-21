@@ -31,55 +31,55 @@ const associate = async () => {
     var words = [];
     var response, jsoned;
   
-    response = await fetch('https://api.datamuse.com/words\?rel_jja\='+wordsList[i].trim());
+    response = await fetch('https://api.datamuse.com/words\?rel_jja\='+wordsList[i].trim(), {mode: 'no-cors'});
     jsoned = await response.json();
     for(var j=0; j<jsoned.length; j++){
       words.push(jsoned[j].word);
     }
 
-    response = await fetch('https://api.datamuse.com/words\?rel_jjb\='+wordsList[i].trim());
+    response = await fetch('https://api.datamuse.com/words\?rel_jjb\='+wordsList[i].trim(), {mode: 'no-cors'});
     jsoned = await response.json();
     for(var j=0; j<jsoned.length; j++){
       words.push(jsoned[j].word);
     }
 
-    response = await fetch('https://api.datamuse.com/words\?rel_syn\='+wordsList[i].trim());
+    response = await fetch('https://api.datamuse.com/words\?rel_syn\='+wordsList[i].trim(), {mode: 'no-cors'});
     jsoned = await response.json();
     for(var j=0; j<jsoned.length; j++){
       words.push(jsoned[j].word);
     }
 
-    response = await fetch('https://api.datamuse.com/words\?rel_trg\='+wordsList[i].trim());
+    response = await fetch('https://api.datamuse.com/words\?rel_trg\='+wordsList[i].trim(), {mode: 'no-cors'});
     jsoned = await response.json();
     for(var j=0; j<jsoned.length; j++){
       words.push(jsoned[j].word);
     }
 
-    response = await fetch('https://api.datamuse.com/words\?rel_ant\='+wordsList[i].trim());
+    response = await fetch('https://api.datamuse.com/words\?rel_ant\='+wordsList[i].trim(), {mode: 'no-cors'});
     jsoned = await response.json();
     for(var j=0; j<jsoned.length; j++){
       words.push(jsoned[j].word);
     }
 
-    response = await fetch('https://api.datamuse.com/words\?rel_spc\='+wordsList[i].trim());
+    response = await fetch('https://api.datamuse.com/words\?rel_spc\='+wordsList[i].trim(), {mode: 'no-cors'});
     jsoned = await response.json();
     for(var j=0; j<jsoned.length; j++){
       words.push(jsoned[j].word);
     }
 
-    response = await fetch('https://api.datamuse.com/words\?rel_gen\='+wordsList[i].trim());
+    response = await fetch('https://api.datamuse.com/words\?rel_gen\='+wordsList[i].trim(), {mode: 'no-cors'});
     jsoned = await response.json();
     for(var j=0; j<jsoned.length; j++){
       words.push(jsoned[j].word);
     }
 
-    response = await fetch('https://api.datamuse.com/words\?rel_com\='+wordsList[i].trim());
+    response = await fetch('https://api.datamuse.com/words\?rel_com\='+wordsList[i].trim(), {mode: 'no-cors'});
     jsoned = await response.json();
     for(var j=0; j<jsoned.length; j++){
       words.push(jsoned[j].word);
     }
 
-    response = await fetch('https://api.datamuse.com/words\?rel_par\='+wordsList[i].trim());
+    response = await fetch('https://api.datamuse.com/words\?rel_par\='+wordsList[i].trim(), {mode: 'no-cors'});
     jsoned = await response.json();
     for(var j=0; j<jsoned.length; j++){
       words.push(jsoned[j].word);
