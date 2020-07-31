@@ -59,7 +59,7 @@
 
         </main>
         <div class="container">
-            <table id="table_id">
+            <table id="list" class="display" style="width:100%">
                 <thead>
                     <tr>
                         <th>Company Name</th>
@@ -397,11 +397,15 @@
         crossorigin="anonymous"></script>
     <script type="text/javascript" charset="utf8"
         src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.js"></script>
+    <script type="text/javascript" charset="utf8"
+        src="https://cdn.datatables.net/responsive/2.2.5/js/dataTables.responsive.min.js"></script>
 
 
     <script>
         $(document).ready(function () {
-            $('#table_id').DataTable();
+            $('#list').DataTable({
+                responsive: true,
+            });
         });
     </script>
 
