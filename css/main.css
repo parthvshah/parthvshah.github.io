@@ -56,6 +56,10 @@ html {
     color: white;
 }
 
+.fa-stack-overflow:hover{
+    color: #0077b5;
+}
+
 .fa-linkedin:hover{
     color: #0077b5;
 }
