@@ -56,7 +56,17 @@ html {
     color: white;
 }
 
+.ai{
+    display: block;
+    margin-right: 20px;
+    color: white;
+}
+
 .fa-stack-overflow:hover{
+    color: #0077b5;
+}
+
+.ai-google-scholar:hover{
     color: #0077b5;
 }
 
