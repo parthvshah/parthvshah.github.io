@@ -3,16 +3,17 @@ body {
     background-position: center center;
     background-repeat: no-repeat;
     background-attachment: fixed;
-	-webkit-background-size: cover;
+    -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
-    min-height:100%;
-    
+    min-height: 100%;
+
 }
+
 html {
-    height:100%;
-    min-height:100%;
+    height: 100%;
+    min-height: 100%;
 }
 
 .overlay {
@@ -27,7 +28,7 @@ html {
 }
 
 .content {
-	font-family: 'Roboto-mono', sans-serif;
+    font-family: 'Roboto-mono', sans-serif;
     position: absolute;
     top: 50%;
     left: 50%;
@@ -36,71 +37,92 @@ html {
 }
 
 #main {
-	font-size: 265%;
+    font-size: 265%;
 }
 
 
 .text {
-	font-size: 160%;
-	color: white;
+    font-size: 160%;
+    color: white;
 }
 
 #intro-icons {
-  	margin: 0 auto;
-  	padding-top: 10px;
+    margin: 0 auto;
+    padding-top: 10px;
 }
 
-.fa{
+.fa {
     display: block;
     margin-right: 20px;
     color: white;
 }
 
-.ai{
+.ai {
     display: block;
     margin-right: 20px;
     color: white;
 }
 
-.fa-stack-overflow:hover{
+.fa-stack-overflow:hover {
     color: #0077b5;
 }
 
-.ai-google-scholar:hover{
+.ai-google-scholar:hover {
     color: #0077b5;
 }
 
-.fa-linkedin:hover{
+.fa-linkedin:hover {
     color: #0077b5;
 }
 
-.fa-quote-right:hover{
+.fa-quote-right:hover {
     color: #0077b5;
 }
 
-.fa-github:hover{
+.fa-github:hover {
     color: #0077b5;
 }
 
-.fa-instagram:hover{
-  color: #0077b5;
-}
-
-.fa-envelope:hover{
-  color: #0077b5;
-}
-
-.fa-file-text-o:hover{
+.fa-instagram:hover {
     color: #0077b5;
 }
 
-.blinking{
-    animation:blinkingText 1.2s infinite;
+.fa-envelope:hover {
+    color: #0077b5;
 }
-@keyframes blinkingText{
-    0%{     color: red;    }
-    49%{    color: red; }
-    60%{    color: transparent; }
-    99%{    color: transparent;  }
-    100%{   color: red;    }
+
+.fa-file-text-o:hover {
+    color: #0077b5;
+}
+
+.blinking {
+    animation: blinkingText 1.2s infinite;
+}
+
+@keyframes blinkingText {
+    0% {
+        color: red;
+    }
+
+    49% {
+        color: red;
+    }
+
+    60% {
+        color: transparent;
+    }
+
+    99% {
+        color: transparent;
+    }
+
+    100% {
+        color: red;
+    }
+}
+
+abbr[title] {
+    border-bottom: none !important;
+    cursor: inherit !important;
+    text-decoration: none !important;
 }
