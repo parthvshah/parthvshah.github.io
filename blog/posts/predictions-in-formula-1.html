@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="The Blog. A collection of thoughts.">
+    <meta name="author" content="Parth Shah">
+    <link rel="shortcut icon" type="image/ico" href="../favicon.ico" />
+
+
+    <title>The Blog</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom fonts for this template -->
+    <link href="../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet'
+        type='text/css'>
+    <link
+        href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800'
+        rel='stylesheet' type='text/css'>
+
+    <!-- Custom styles for this template -->
+    <link href="../css/clean-blog.min.css" rel="stylesheet">
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-128498707-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'UA-128498707-1');
+    </script>
+
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+        <div class="container">
+            <a class="navbar-brand" href="../index.html">The Blog</a>
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
+                data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
+                aria-label="Toggle navigation">
+                Menu
+                <i class="fas fa-bars"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="../index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../about.html">About</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <header class="masthead" style="background-image: url('../img/formula-1-bg.jpg')">
+        <div class="overlay"></div>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-md-10 mx-auto">
+                    <div class="post-heading">
+                        <h1>Predictions in Formula 1</h1>
+                        <h2 class="subheading">What does the 2021 WDC controversy, race results and driver matchup have
+                            in common?</h2>
+                        <span class="meta">Posted by
+                            Parth Shah
+                            on February 27, 2023 [6 minutes]</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Post Content -->
+    <article>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-md-10 mx-auto">
+                    <p>For Formula 1, the turbo-hybrid era dawned in 2014. Since then, Mercedes AMG, and notably Sir
+                        Lewis Hamilton, has dominated every season. However, come 2021, the fans are given the most
+                        exciting season in recent history. Red Bull Racing's Max Verstappen brings the fight to the
+                        seven-time world champion and claims his first drivers' championship in a season riddled with
+                        drama and controversy. Formula 1 recently drew a wave of new fans post the release of a highly
+                        dramatized documentary series on Netflix titled "Drive to Survive." Oddly enough, this season
+                        lived up to Netflix's dramatization of previous seasons. Verstappen denies Hamilton of his
+                        eighth world championship, which would have put him ahead of the highly decorated former Ferrari
+                        driver, Michael Schumacher. Additionally, the two title contenders enter the last race in a
+                        22-race season equal in points. It all came down to this one race.</p>
+
+                    <p>Abu Dhabi's Yas Marina circuit hosted the finale of the 2021 Formula 1 season. Verstappen and
+                        Hamilton are tied at 369.5 points. Historically, this circuit has not been kind to Red Bull's
+                        cars that are set up for higher downforce. Indicatively, Hamilton led most of the race after
+                        taking the lead in lap 1. On lap 53, Nicholas Latifi brought out the safety car. Hamilton stays
+                        out to preserve track position while Verstappen pits for a fresh set of the red-walled soft
+                        tires. When he emerged from the pit lane, he had retained second but had five lapped cars
+                        between him and Hamilton. On lap 57, Michael Masi, the race director, indicated that the lapped
+                        cars might unlap themselves by going past Hamilton. This put Verstappen right on the tail of
+                        Hamilton. Safety car comes in with one lap of racing remaining and Verstappen takes the lead.
+                        Holding off Hamilton for the short remaining race distance, he eventually classifies first and
+                        is crowned world champion. </p>
+
+                    <p>Post this race; there were multiple protests raised by Mercedes AMG against the decisions taken
+                        by Michael Masi in the final laps. They contested the safety car procedures and instructions to
+                        unlap that were selectively sent to drivers. This is an exciting situation. Hamilton and
+                        Verstappen are incredibly talented drivers signed to capable motor racing teams. During the
+                        season, both of them displayed supreme skills in each race. Is it fair to decide the result of
+                        an entire season based on one race? Especially when the outcome is controversial. What if we
+                        could analyze the season from a lens that is not calibrated to points? I did just that and here
+                        is the result.</p>
+
+                    <img class="img-fluid" width="800" height="1000" src="../img/f1-error.png" alt="Line Graph">
+                    <span class="caption text-muted">Relative Merits of the 2021 Formula 1 Drivers.</span>
+
+                    <p>This model looks at the season as a Bayesian problem. Each race is considered to follow some
+                        distribution of utility values for each driver. This codifies a combination of factors per race,
+                        like the driver's skill, the pace of the car, track conditions, driver or team error, car setup,
+                        etc. Analyzing the classifications of each race up to the finale, we can infer these utilities
+                        using appropriate sampling methods (and a well-formed prior). Once we have arrived at an
+                        approximation of these utilities, we can simply consider it to be a Gaussian mixture. Credits to
+                        <a href="https://www.isi.edu/directory/myrlm/">Myrl Marmarelis at ISI</a> for developing this
+                        method. Additional details and experiments (with
+                        football!) are available on his <a
+                            href="https://myrl.marmarel.is/posts/ranked-choice-voting/#entry">blog</a>.
+                    </p>
+
+                    <p>Ultimately, you may agree or disagree with the result of the 2021 season. However, I hope you can
+                        see the merits of this model in predicting race results without additional covariate information
+                        about the races or the championship points system. If you look at the ranking produced by the
+                        model for the 2021 season, it is remarkably close to the final drivers' championship standing.
+                    </p>
+
+                    <style type="text/css">
+                        td {
+                            padding: 0 10px;
+                        }
+
+                        .center {
+                            margin-left: auto;
+                            margin-right: auto;
+                        }
+                    </style>
+
+                    <table class="center">
+                        <thead>
+                            <tr>
+                                <th>Final</th>
+                                <th>Model</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>VER</td>
+                                <td>VER</td>
+                            </tr>
+                            <tr>
+                                <td>HAM</td>
+                                <td>HAM</td>
+                            </tr>
+                            <tr>
+                                <td>BOT</td>
+                                <td>BOT</td>
+                            </tr>
+                            <tr>
+                                <td>PER</td>
+                                <td>PER</td>
+                            </tr>
+                            <tr>
+                                <td><b>SAI</b></td>
+                                <td><b>LEC</b></td>
+                            </tr>
+                            <tr>
+                                <td>NOR</td>
+                                <td>NOR</td>
+                            </tr>
+                            <tr>
+                                <td>LEC</td>
+                                <td>SAI</td>
+                            </tr>
+                            <tr>
+                                <td><b>RIC</b></td>
+                                <td><b>GAS</b></td>
+                            </tr>
+                            <tr>
+                                <td>GAS</td>
+                                <td>RIC</td>
+                            </tr>
+                            <tr>
+                                <td><b>ALO</b></td>
+                                <td><b>OCO</b></td>
+                            </tr>
+                            <tr>
+                                <td>OCO</td>
+                                <td>ALO</td>
+                            </tr>
+                            <tr>
+                                <td><b>VET</b></td>
+                                <td><b>STR</b></td>
+                            </tr>
+                            <tr>
+                                <td>STR</td>
+                                <td>VET</td>
+                            </tr>
+                            <tr>
+                                <td>TSU</td>
+                                <td>TSU</td>
+                            </tr>
+                            <tr>
+                                <td>RUS</td>
+                                <td>RUS</td>
+                            </tr>
+                            <tr>
+                                <td>RAI</td>
+                                <td>RAI</td>
+                            </tr>
+                            <tr>
+                                <td>LAT</td>
+                                <td>GIO</td>
+                            </tr>
+                            <tr>
+                                <td>GIO</td>
+                                <td>LAT</td>
+                            </tr>
+                            <tr>
+                                <td>MSC</td>
+                                <td>MSC</td>
+                            </tr>
+                            <tr>
+                                <td>MAZ</td>
+                                <td>MAZ</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <p>Keep in mind that Red Bull Racing did not have a solid championship-contending car from the
+                        results of the first few races. Additional experiments have displayed the model's robustness
+                        when the number of observable races is varied. This means we can predict the outcome of a season
+                        reasonably early on! The Formula 1 point system has been evolving ever since its inception. I
+                        assume it is not arbitrary, but one cannot help and wonder why it is the way it is. Why do the
+                        first three positions get 25, 18, and 15 points? Why is this not uniformly distributed? Why does
+                        the driver with the fastest lap get one additional point instead of seven? Why are points
+                        awarded only during the race on a Sunday and not during qualifying on a Saturday? Maybe models
+                        agnostic to these conditions are better at discriminating driver skills. Since the results from
+                        the model are reasonably close to the results determined using points, we can restore our faith
+                        in the system. To some extent, anyway.</p>
+
+                    <p>There is a multitude of fields that could benefit from a similar treatment. Alaska and Maine
+                        allow Ranked Choice Voting for statewide and federal elections. Surveys that require annotators
+                        to rank options for a question can be denoised. Nevertheless, for now, on the eve of the 2023
+                        Formula 1 championship, let us stick to motorsport. I am also developing a method to calculate
+                        driver-driver matchup scores similar to Elo in Chess. This can be used to determine the odds. I
+                        hope to find the time to update this blog as the season progresses. </p>
+
+
+
+                    <p></p>
+                </div>
+            </div>
+        </div>
+    </article>
+
+    <hr>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-md-10 mx-auto">
+                    <ul class="list-inline text-center">
+                        <li class="list-inline-item">
+                            <a href="https://github.com/parthvshah">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fas fa-circle fa-stack-2x"></i>
+                                    <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                    </ul>
+                    <p class="copyright text-muted">Copyright &copy; Parth Shah 2023</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="../vendor/jquery/jquery.min.js"></script>
+    <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Custom scripts for this template -->
+    <script src="../js/clean-blog.min.js"></script>
+
+</body>
+
+</html>
