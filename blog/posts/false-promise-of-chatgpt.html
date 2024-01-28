@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="The Blog. A collection of thoughts.">
+    <meta name="author" content="Parth Shah">
+    <link rel="shortcut icon" type="image/ico" href="../favicon.ico" />
+
+
+    <title>The Blog</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom fonts for this template -->
+    <link href="../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet'
+        type='text/css'>
+    <link
+        href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800'
+        rel='stylesheet' type='text/css'>
+
+    <!-- Custom styles for this template -->
+    <link href="../css/clean-blog.min.css" rel="stylesheet">
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-128498707-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'UA-128498707-1');
+    </script>
+
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+        <div class="container">
+            <a class="navbar-brand" href="../index.html">The Blog</a>
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
+                data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
+                aria-label="Toggle navigation">
+                Menu
+                <i class="fas fa-bars"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="../index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../about.html">About</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <header class="masthead" style="background-image: url('../img/chatgpt-bg.jpg')">
+        <div class="overlay"></div>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-md-10 mx-auto">
+                    <div class="post-heading">
+                        <h1>The False Promise of ChatGPT</h1>
+                        <h2 class="subheading">My rants on this new trend.</h2>
+                        <span class="meta">Posted by
+                            Parth Shah
+                            on February 1, 2024 [5 minutes]</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Post Content -->
+    <article>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-md-10 mx-auto">
+                    <p>There is a disturbing new trend among students. Computer science students, particularly. No, it
+                        isn't a trend you will find on the clock app. It's the ubiquitisation of Large Language Models
+                        (LLMs) like ChatGPT, Bard, Copilot, and LLaMA. I believe we are going down an extremely
+                        dangerous path.</p>
+
+                    <p>I present my arguments against LLMs in three parts. These are informed by my own experiences,
+                        research, and observations. The first part talks about the overall harms and risks, the second
+                        part talks specifically about the software engineering industry and the third part is, well, a
+                        sort of silver lining. As I complete my Master's from the University of Southern California, I
+                        reflect on the past six years as a student. I have lived through this change. Right from the
+                        publication of the ground-breaking "Attention is all you need" in 2017 to the public release of
+                        ChatGPT in 2022. Any conversation I have with my peers now is marred by the mention of one of
+                        these LLMs but mostly ChatGPT. Artificial intelligence has already taken over our conversations.
+                        PS: If you are a current student, skip to part two, the section titled "Just 'ChatGPT' it!"</p>
+
+                    <h2 class="section-heading">Injurious to Health</h2>
+
+                    <p>LLMs are still experimental. Granted, they have been in the wild for a couple of years now but
+                        recall that OpenAI themselves are a young institution with an even younger product. They have to
+                        constantly update their content filtering and downstream harmful text detection algorithms as
+                        they acquire more users. They will continue to do so for a long time due to the generative and
+                        unpredictable nature of these models. It isn't as easy as it was before to disable the
+                        guardrails on ChatGPT but still very possible. Some early examples display the extreme harms of
+                        such models if content is not filtered. Research shows that ChatGPT and LLaMA are both heavily
+                        biased in the nationality and gender dimensions. How can you still, in good faith, use these
+                        tools to develop applications? No amount of content filtering, guard-railing, or fine-tuning
+                        will eliminate the bias it currently demonstrates. This is because of the amount of biased data
+                        these monster-sized models ingest during training. Generalized models come with a penalty.</p>
+
+
+                    <p>People don't think about the energy impact of training and then serving such complex models. If a
+                        cloud service is offered for free, individual environmental conscience takes a hike. It is
+                        estimated that ChatGPT alone uses 1 GWh each day, which is the equivalent of the daily energy
+                        consumption for about 33,000 U.S. households. Models are getting larger, and are being trained
+                        with more data. The number of companies that are building products based on or using LLMs is
+                        also ever-growing. </p>
+
+                    <p>And we are barely concerned with Intellectual Property (IP) issues this beast generates. The law
+                        will forever play catch-up with technology but certain issues will be too huge to ignore in the
+                        very near future. Independent artists, contributors to open-source software are all rightfully
+                        concerned that their work has been used by a for-profit organization to create a product that is
+                        so widely used. There are several gray areas with respect to the ownership of the content that
+                        it spits out as well. Does OpenAI own the content that comes out of ChatGPT? Does the prompt
+                        engineer? Who is then responsible when things go awry?
+                    </p>
+
+                    <h2 class="section-heading">"Just 'ChatGPT' it!"</h2>
+
+                    <p>I hate when services become verbs. You may argue that these models are still safe to use in
+                        low-impact tasks such as writing emails, and captions or writing up simple scripts in Python.
+                        You forget about the far-reaching consequences of using these types of services on your personal
+                        development! I break down all the reasons I think you should abandon ChatGPT if you are a
+                        student in the following enumerated list.
+                    </p>
+
+                    <ol>
+                        <li>
+                            <p>While building your latest web-application, you come across an error. One of your
+                                React components is unable to render on your localhost. You quickly open ChatGPT,
+                                directly copy the entire error from your console to the chat window and blindly hit
+                                enter, hoping to find the solution quickly. As I see it, there are two major issues
+                                here. Firstly, debugging errors from warnings/logs/error messages is a very important
+                                engineering skill. Even better if you can cross-reference the original documentation and
+                                change log. Many times, in the past, I have been able to solve an error I encounter by
+                                carefully reading all related messages and performing a quick Google search to find
+                                associated documentation. Secondly, the act of googling the error, browsing multiple
+                                answers on Stackoverflow, poring through documentation itself has massive benefits! You
+                                have learnt 15 new instances where the same error could surface and are now adept in
+                                dealing with all of them. ChatGPT is only going to give you a single, point-fix. Often,
+                                it hallucinates this fix but that is an issue that requires its own point.
+                            </p>
+                        </li>
+                        <li>
+                            <p>Imagine you rushing to your Teaching Assistant with a very important question or
+                                clarification regarding the logistics of your exam which is scheduled to begin within
+                                the next hour. Now, imagine her or him “making up” an answer instead of being honest and
+                                admitting their ignorance on the matter. You would be furious in the future, when you
+                                learn that you have been lied to or misinformed. That is exactly what ChatGPT does! Not
+                                only does it hallucinate information but it is eerily confident in it. Confident enough
+                                to be convincing, even. The gaps in ChatGPT’s knowledge are very evident when used in
+                                niche areas where there is little information available to begin with. Seek this
+                                information instead of a muddled version of it.
+                            </p>
+                        </li>
+                        <li>
+                            <p>If you are constantly asking ChatGPT to write your emails for you or asking for help
+                                on your essays, you may risk under-developing your communication skills. I have watched
+                                (in awe) my senior colleagues draft up succinct and clear emails effortlessly, like a
+                                skilled weaver, putting together a beautiful Persian rug. That right there is decades of
+                                experience in communication. Yes, actual, penned communication and not auto-generated.
+                                Moreover, the more you write, the more of a style you develop. If you read enough text
+                                generated by a model, you will see that it lacks a style. It lacks color and it lacks
+                                taste. Personalization of communication is paramount. It helps you develop
+                                relationships, be it personal or professional. Imagine getting an apology, generated by
+                                ChatGPT.
+                            </p>
+                        </li>
+                        <li>
+                            <p>Say you are asking ChatGPT to ideate for you. You are hosting a brunch this Sunday and
+                                wanted ideas for the menu. You run to your computer, key in a simple prompt and read the
+                                response. A fig and strawberry salad, lamb chops and a hearty leek soup sounds perfect.
+                                However, what about all the things that ChatGPT did not offer in its response? What
+                                about all the other, thousands of things, you may have enjoyed better than the
+                                suggestions but never saw the light of day because you based your menu of a (supposedly)
+                                artificially intelligent agent? We are taking away the creative elements embedded in
+                                everyday tasks. We are firing our organic neurons less often. I fear that we are losing
+                                something that is innately human by offloading work onto computers; thinking. This
+                                low-impact example only demonstrates the harms of LLMs. Extension to a high-impact
+                                example is left as an exercise for the reader.
+                            </p>
+                        </li>
+                    </ol>
+
+                    <h2 class="section-heading">Silver lining?</h2>
+
+                    <p>Some tasks that require little supervision such as formatting, greatly benefit from the use of
+                        such services. Mundane, repetitive or low-impact tasks should be automated using ChatGPT as it
+                        can save certain woman-hours. However, there are studies that show that these models are not
+                        well-behaved even with templates or greatly vary their responses on certain semantic alterations
+                        of the prompt. The greatest benefit the world of computer science is seeing right now, due to
+                        the widespread penetration of these services is that of awareness. Once again, issues of
+                        fairness, tractability and transparency are in the limelight. Many technologies, before ChatGPT
+                        suffered from the same issues but now we see more conversations surrounding it. Hopefully, it
+                        leads to more solutions than problems. The 2024 year will be one for the history books as the
+                        peak of generative AI adoption meets multiple, large elections. Will misinformation reign
+                        supreme? We will never know. </p>
+
+                    <p>I remember wondering how my parents got through college without a Google search. When I asked
+                        them, they curtly replied saying, "libraries and textbooks exist." I can see the next generation
+                        of students wondering how we got through college without ChatGPT. "Google search and
+                        Stackoverflow exist." What a time to be alive. </p>
+                    <p></p>
+                </div>
+            </div>
+        </div>
+    </article>
+
+    <hr>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-md-10 mx-auto">
+                    <ul class="list-inline text-center">
+                        <li class="list-inline-item">
+                            <a href="https://github.com/parthvshah">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fas fa-circle fa-stack-2x"></i>
+                                    <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                    </ul>
+                    <p class="copyright text-muted">Copyright &copy; Parth Shah 2024</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="../vendor/jquery/jquery.min.js"></script>
+    <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Custom scripts for this template -->
+    <script src="../js/clean-blog.min.js"></script>
+
+</body>
+
+</html>
