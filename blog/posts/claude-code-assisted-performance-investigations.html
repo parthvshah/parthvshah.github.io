@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="The Blog. A collection of thoughts.">
+    <meta name="author" content="Parth Shah">
+    <link rel="shortcut icon" type="image/ico" href="../favicon.ico" />
+
+
+    <title>The Blog</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom fonts for this template -->
+    <link href="../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet'
+        type='text/css'>
+    <link
+        href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800'
+        rel='stylesheet' type='text/css'>
+
+    <!-- Custom styles for this template -->
+    <link href="../css/clean-blog.min.css" rel="stylesheet">
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-128498707-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'UA-128498707-1');
+    </script>
+
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+        <div class="container">
+            <a class="navbar-brand" href="../index.html">The Blog</a>
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
+                data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
+                aria-label="Toggle navigation">
+                Menu
+                <i class="fas fa-bars"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="../index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../about.html">About</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <header class="masthead" style="background-image: url('../img/claude-bg.jpg')">
+        <div class="overlay"></div>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-md-10 mx-auto">
+                    <div class="post-heading">
+                        <h1>Claude Code Assisted Performance Investigations</h1>
+                        <h2 class="subheading">Demonstrating a top-down approach to performance investigations with AI
+                            agents.</h2>
+                        <span class="meta">Posted by
+                            Parth Shah
+                            on April 1, 2026 [6 minutes]</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Post Content -->
+    <article>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-md-10 mx-auto">
+
+                    <h2 class="section-heading">Introduction</h2>
+
+                    <p><a href="https://github.com/TPC-Council/HammerDB">HammerDB</a> is the industry-leading benchmarking and load testing software that is used to characterize 
+                        the performance of a database. When used with MySQL, together, they exercise a large portion of the 
+                        Linux kernel. When a performance regression is observed in HammerDB with MySQL with the latest upstream
+                        kernel release, identifying the exact commit that is responsible for this may be challenging. In
+                        this blog, I demonstrate an approach of tackling this using <a href="https://code.claude.com/docs/en/overview">Claude Code</a> and skills. Skills are
+                        reusable, task-focused capabilities that let AI agents reliably perform specific jobs in a
+                        repeatable way. Recently, after the release of v6.17, a large regression was observed for
+                        HammerDB with MySQL against v6.12, an LTS kernel release. Traditional profiling using perf stat
+                        indicated an increase in front-end stalls per transaction on v6.17 when compared to v6.12. The
+                        challenge was to identify an upstream change that could explain this observed behavior. Manually
+                        reviewing every commit between these two versions is impossible.</p>
+
+                    <h2 class="section-heading">Solution</h2>
+
+                    <p>This approach uses two inputs:</p>
+                    <ul>
+                        <li>A workload profile consisting of kernel functions that the workload executes while
+                            executing in a steady state.</li>
+                        <li>A git log that focuses on commits between selected tags that modify the files associated
+                            with the kernel functions in the workload profile</li>
+                    </ul>
+
+                    <p>Claude Code then produces a ranked list of commits most likely to affect performance of this
+                        workload. At a high level, the loop looks like this:</p>
+
+                    <ol>
+                        <li>Profile the workload to identify hot kernel functions and the files they belong to</li>
+                        <li>Use a Claude Code skill to list relevant upstream commits between upstream tags for those
+                            paths</li>
+                        <li>Ask Claude Code to rank commits that affect performance with additional profiling
+                            information</li>
+                        <li>Repeat between next pair of upstream tags</li>
+                        <li>Validate by reverting/cherry-picking the commit and building a kernel</li>
+                    </ol>
+
+                    <p>Let's walk through what this looks like for HammerDB with MySQL with a Claude Code skill.
+                    </p>
+
+                    <h4>Step 1: Profile HammerDB and MySQL to identify hot kernel functions</h4>
+
+                    <p>This workload profile will help filter commits between two different upstream tags as the commits
+                        I am interested in are most likely affecting kernel functions that the workload is executing.
+                        For a large workload like HammerDB with MySQL, choose a steady state interval to profile
+                        using perf record and kernel cycles. Parse the resulting perf report to identify hot kernel
+                        functions. The output of this step is a simple CSV containing:</p>
+
+                    <ul>
+                        <li>Kernel function name</li>
+                        <li>Sample count</li>
+                        <li>Source file path</li>
+                    </ul>
+
+                    <p>Example kernel_func.csv file:</p>
+                    <pre><code>function,samples,sys_percent,file_path 
+cpuidle_enter_state,5381,25.72,drivers/cpuidle/coupled.c
+tick_nohz_idle_exit,615,2.94,kernel/sched/idle.c 
+__wake_up_common_lock,553,2.64,kernel/sched/wait.c 
+task_sched_runtime,324,1.55,kernel/sched/core.c 
+mutex_lock,145,0.69,drivers/dma/acpi-dma.c 
+mutex_unlock,144,0.69,drivers/dma/acpi-dma.c</code></pre>
+
+                    <h4>Step 2: Use a Claude Code skill to list relevant upstream commits between v6.12 and v6.13 for
+                        those paths</h4>
+
+                    <p>Instead of listing all 72,482 commits between v6.12 and v6.17, the target upstream tags, a
+                        chunking approach is used to keep Claude Code focused and prevent context poisoning. A skill was
+                        defined to extract all upstream commits between two tags. Create a skill using the skill builder
+                        or manually. Following are the steps to add a skill titled find-perf-commits manually:</p>
+
+                    <ol>
+                        <li>Create a folder under ~/.claude/skills/ with the name of the skill.</li>
+                        <li>Add a SKILL.md file with a short description and other relevant information that allows
+                            Claude Code to invoke the
+                            skill and effectively use it.</li>
+                        <li>Optionally, add any scripts under ~/.claude/skills/find-perf-commits/scripts/ as references.
+                            I had a basic python script that used git log and regex to retrieve and clean commit
+                            messages.</li>
+                    </ol>
+
+                    <p>Example find-perf-commits SKILL.md:</p>
+                    <pre><code>---
+name: find-perf-commits 
+description: This skill is used to obtain a git log between two tags or versions of the linux upstream kernel repository. 
+--- 
+Use this skill to obtain a sanitized list of commits between two tags. This is guided by an input CSV file that has a list of kernel functions involved in the execution of a workload. 
+Execute the given python script under scripts directory of this skill. The script uses command line arguments to take inputs. 
+The command line help can be found below. 
+The inputs are - 
+- `tag1`: start tag 
+- `tag2`: end tag 
+- `input_csv`: a csv file path that has all the kernel functions listed 
+Script help and example usage:
+
+``` 
+python3 generate_git_log.py 6.12 6.13 ~/results/hammerdb/kernel_func.csv 
+``` 
+
+This generates a git log between versions 6.12 and 6.13 for the results file at path specified as command line argument. 
+That csv contains a list of kernel functions used by the workload. 
+The outputs are: 
+- `git_log_txt`: a text file of all the git logs that can be added to the context of the current chat 
+The repository root is already set in the script.</code></pre>
+
+                    <p></p>
+
+                    <h4>Step 3: Ask Claude Code to rank commits that affect performance with additional front-end stalls
+                        metric</h4>
+
+                    <p>In this case, the commits mostly included changes made to the kernel scheduler (/sched). This
+                        makes sense as a scheduler related change could potentially introduce front-end stalls.</p>
+                    <p>Example prompt: It was observed that HammerDB with MySQL Database produced a high number of
+                        frontend stalls on 6.17 when compared to 6.12 per transaction. Use this information to re-check
+                        the commits list. Which commits may lead to an increase in frontend stalls?</p>
+
+                    <h4>Step 4: Repeat between v6.13 and v6.14, v6.14 and v6.15...</h4>
+
+                    <p>Repeating steps 2 and 3 for all upstream tags in the target tag window produces a ranked list of
+                        commits between each tag. Next, I asked Claude Code to produce a super ranking. I provided
+                        additional context to Claude Code by asking it to run git show against all the short-listed
+                        commits
+                        between all tags. This adds the code changes affected by this commit into the context. An
+                        example commit in this super ranking was:</p>
+                    <pre><code>155213a — sched/fair: Bump sd->max_newidle_lb_cost when newidle balance fails</code></pre>
+
+                    <p>This commit was introduced in the v6.17 development window. Example ranking:</p>
+
+                    <ol>
+                        <li><a href="https://github.com/torvalds/linux/commit/155213a2aed4">155213a2aed4</a> sched/fair: Bump sd->max_newidle_lb_cost when newidle balance fails</li>
+                        <li><a href="https://github.com/torvalds/linux/commit/c1f43c342e1f">c1f43c342e1f</a> sched/fair: Fix sched_can_stop_tick() for fair tasks</li>
+                        <li><a href="https://github.com/torvalds/linux/commit/e932c4ab38f0">e932c4ab38f0</a> sched/core: Prevent wakeup of ksoftirqd during idle load balance</li>
+                        <li><a href="https://github.com/torvalds/linux/commit/dcbb598e689e">dcbb598e689e</a> block: blk-mq: fix uninit-value in blk_rq_prep_clone and refactor</li>
+                        <li><a href="https://github.com/torvalds/linux/commit/c9a3019603b8">c9a3019603b8</a> fs/file.c: conditionally clear full_fds</li>
+                    </ol>
+
+                    <p></p>
+
+                    <h4>Step 5: Validate by reverting 155213a in v6.17 and building a kernel</h4>
+
+                    <p>The commit 155213a backs off newidle balancing by increasing its cost when it fails. The
+                        arguments for this patch are that when newidle is unsuccessful, continued scanning is of little
+                        benefit. Low latency workloads like schbench benefit from aggressive backoff. The arguments
+                        against this patch are that the backoff is too aggressive and it can lead to under-utilization
+                        of CPUs. This commit was tested early as it appeared in the super ranking and additionally,
+                        upstream had discovered regressions in multiple workloads due to this commit. A v6.17 kernel
+                        built with this commit reverted restored HammerDB performance to the v6.12 level.</p>
+
+                    <h2 class="section-heading">Limitations</h2>
+
+                    <p>This approach uses Claude Code, a generative AI tool. Therefore, it has its limitations. The
+                        rankings
+                        are probabilistic as output from Claude Code is probabilistic. There is a possibility that a
+                        commit
+                        that affects the performance of your workload is missed. Additionally, identifying upstream
+                        changes to attribute to a performance issue is non-trivial. There could be multiple changes that
+                        are together responsible for the observed performance issue. Commit messages may also not tell
+                        the whole story. Kernel mailing lists often discuss each patch set in detail and provide
+                        supporting testing data to the developers as feedback. This would not be captured in the final
+                        commit message.</p>
+
+                    <h2 class="section-heading">Conclusion</h2>
+
+                    <p>This approach helped pick a high-value first revert to test, reducing the overall time-to-answer.
+                        Claude Code successfully helps narrow down a large candidate space of commits potentially
+                        affecting
+                        performance. To recap, if you are trying to evaluate upstream changes that may affect the
+                        performance of your workload, capture (1) a workload profile, (2) a candidate commit list, and
+                        (3) then validate the results.</p>
+
+                    <p></p>
+                </div>
+            </div>
+        </div>
+    </article>
+
+    <hr>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-md-10 mx-auto">
+                    <ul class="list-inline text-center">
+                        <li class="list-inline-item">
+                            <a href="https://github.com/parthvshah">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fas fa-circle fa-stack-2x"></i>
+                                    <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                    </ul>
+                    <p class="copyright text-muted">Copyright &copy; Parth Shah 2026</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="../vendor/jquery/jquery.min.js"></script>
+    <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Custom scripts for this template -->
+    <script src="../js/clean-blog.min.js"></script>
+
+</body>
+
+</html>

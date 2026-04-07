@@ -130,3 +130,17 @@ abbr[title] {
     cursor: inherit !important;
     text-decoration: none !important;
 }
+
+pre {
+    background-color: #f4f4f4;
+    border-left: 4px solid #ccc;
+    padding: 1rem;
+    overflow-x: auto;
+    border-radius: 4px;
+    font-size: 0.9em;
+}
+
+pre code {
+    background: none;
+    padding: 0;
+}
