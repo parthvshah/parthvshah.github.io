@@ -171,27 +171,47 @@ mutex_unlock,144,0.69,drivers/dma/acpi-dma.c</code></pre>
 
                     <p>Example find-perf-commits SKILL.md:</p>
                     <pre><code>---
-name: find-perf-commits 
-description: This skill is used to obtain a git log between two tags or versions of the linux upstream kernel repository. 
---- 
-Use this skill to obtain a sanitized list of commits between two tags. This is guided by an input CSV file that has a list of kernel functions involved in the execution of a workload. 
-Execute the given python script under scripts directory of this skill. The script uses command line arguments to take inputs. 
-The command line help can be found below. 
-The inputs are - 
-- `tag1`: start tag 
-- `tag2`: end tag 
-- `input_csv`: a csv file path that has all the kernel functions listed 
-Script help and example usage:
+name: find-perf-commits
+description: Use this skill when you need to find Linux kernel commits between two version tags that touch source files associated with a workload profile. Invoke this during performance regression investigations to narrow a large commit range down to candidates relevant to the workload.
+---
 
-``` 
-python3 generate_git_log.py 6.12 6.13 ~/results/hammerdb/kernel_func.csv 
-``` 
+## Purpose
+Filter Linux upstream kernel commits between two tags to those touching source files associated with a given workload profile. Used to narrow down performance regressions between kernel versions without reviewing every commit manually.
 
-This generates a git log between versions 6.12 and 6.13 for the results file at path specified as command line argument. 
-That csv contains a list of kernel functions used by the workload. 
-The outputs are: 
-- `git_log_txt`: a text file of all the git logs that can be added to the context of the current chat 
-The repository root is already set in the script.</code></pre>
+## Inputs
+- `tag1`: start tag (e.g., `6.12`)
+- `tag2`: end tag (e.g., `6.13`)
+- `input_csv`: path to a CSV file listing hot kernel functions from a perf profile
+
+### Expected CSV format
+```
+function,samples,sys_percent,file_path
+cpuidle_enter_state,5381,25.72,drivers/cpuidle/coupled.c
+tick_nohz_idle_exit,615,2.94,kernel/sched/idle.c
+```
+
+## Running the script
+Run the script using its full path:
+```
+python3 ~/.claude/skills/find-perf-commits/scripts/generate_git_log.py v6.12 v6.13 ~/results/hammerdb/kernel_func.csv
+```
+
+The script expects the Linux upstream kernel repository at `~/linux/`. If it is elsewhere, pass the repo path as a fourth argument:
+```
+python3 ~/.claude/skills/find-perf-commits/scripts/generate_git_log.py v6.12 v6.13 ~/results/hammerdb/kernel_func.csv ~/src/linux
+```
+
+## Output
+The script writes `git_log_tag1_tag2.txt` to the same directory as `input_csv`.
+
+After the script completes:
+1. Read the output file into the current context.
+2. Present the commit list to the user.
+3. Ask the user for any additional profiling context (e.g., perf metrics, front-end stall counts) to help rank commits by likelihood of causing a performance regression.
+
+## Error handling
+- If the repository path is wrong, the script will report a `git` error — ask the user to confirm the repo path.
+- If no commits are found, the `file_path` values in the CSV may not match the kernel source tree layout — ask the user to verify them.</code></pre>
 
                     <p></p>
 
